@@ -1,6 +1,20 @@
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <LMap
+    style="height: 100dvh"
+    :zoom="6"
+    :center="[47.21322, -1.559482]"
+    :use-global-leaflet="false"
+  >
+    <LTileLayer
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+      layer-type="base"
+      name="OpenStreetMap"
+      class="z-0 absolute top-0 left-0"
+    />
+    <Input
+      class="z-50 w-96 absolute top-4 left-4"
+      placeholder="Search for a place"
+    />
+</LMap>
 </template>
