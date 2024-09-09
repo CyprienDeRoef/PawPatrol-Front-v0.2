@@ -5,12 +5,13 @@ const email = ref('')
 const password = ref('')
 
 async function handleSignin() {
-    await signIn();
+    const res = await signIn('credentials', { email: email.value, password: password.value });
+    console.log(res)
 }
 </script>
 
 <template>
-<form @submit.prevent="signIn('credentials', {email, password})">
+<form @submit.prevent="handleSignin()">
     <FormField v-slot="{ componentField }" name="email">
         <FormItem class="w-full">
             <FormLabel>
