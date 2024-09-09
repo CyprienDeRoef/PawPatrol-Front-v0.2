@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@sidebase/nuxt-auth",
     "shadcn-nuxt",
+    "nuxt-lucide-icons",
   ],
   shadcn: {
     prefix: "",
