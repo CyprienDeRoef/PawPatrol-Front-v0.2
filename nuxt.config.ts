@@ -15,11 +15,11 @@ export default defineNuxtConfig({
     componentDir: "./components/ui",
   },
   auth: {
-    baseURL: "http://localhost:8000/auth/",
+    baseURL: "http://localhost:8000",
     provider: {
       type: "local",
       endpoints: {
-        signIn: { path: "", method: "post" },
+        signIn: { path: "/auth", method: "post" },
         signOut: { path: "logout", method: "post" },
         signUp: { path: "register", method: "post" },
         getSession: { path: "session", method: "get" },

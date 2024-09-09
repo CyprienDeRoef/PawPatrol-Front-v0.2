@@ -1,36 +1,16 @@
 <script setup lang="ts">
-import { useForm } from 'vee-validate'
-import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
+const { status, signIn } = useAuth()
 
-const formSchema = toTypedSchema(z.object({
-    email: z.string().min(2).max(50),
-    password: z.string().min(8).max(50),
-}))
+const email = ref('')
+const password = ref('')
 
-const { handleSubmit } = useForm({
-  validationSchema: formSchema,
-})
-
-const onSubmit = handleSubmit(async (values) => {
-    try {
-        console.log(values);
-        const res = await $fetch('http://localhost:8000/auth', {
-            method: 'POST',
-            body: JSON.stringify(values),
-            headers: {
-                'Content-Type': 'application/ld+json',
-            },
-        })
-        console.log(res)
-  } catch (error) {
-    console.error(error)
-  }
-})
+async function handleSignin() {
+    await signIn();
+}
 </script>
 
 <template>
-<form class="" @submit="onSubmit">
+<form @submit.prevent="signIn('credentials', {email, password})">
     <FormField v-slot="{ componentField }" name="email">
         <FormItem class="w-full">
             <FormLabel>
@@ -38,7 +18,7 @@ const onSubmit = handleSubmit(async (values) => {
                 <span class="text-red-500">*</span>
             </FormLabel>
             <FormControl>
-                <Input type="email" placeholder="john.doe@gmail.com" v-bind="componentField" />
+                <Input v-model="email" type="email" placeholder="john.doe@gmail.com" v-bind="componentField"/>
             </FormControl>
             <FormMessage />
         </FormItem>
@@ -50,12 +30,12 @@ const onSubmit = handleSubmit(async (values) => {
                 <span class="text-red-500">*</span>
             </FormLabel>
             <FormControl>
-                <Input type="password" placeholder="********" v-bind="componentField" />
+                <Input v-model="password" type="password" placeholder="********" v-bind="componentField" />
             </FormControl>
             <FormMessage />
         </FormItem>
     </FormField>
-    <div class="flex justify-center mt-4">
+    <div class="flex justify-center mt-6">
         <Button type="submit" class="w-1/2">
             Login
         </Button>

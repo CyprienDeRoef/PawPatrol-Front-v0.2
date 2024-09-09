@@ -1,10 +1,9 @@
 <script setup>
+const { status } = useAuth()
 const map = ref(null)
 
-// When the map is ready
 const onMapReady = () => {
-    // Access the Leaflet map instance
-    console.log(map.value.leafletObject)
+    console.log(map.value.leafletObject, status, getSession())
 }
 </script>
 
@@ -31,6 +30,9 @@ const onMapReady = () => {
         class="w-80 z-[400] relative top-6 mx-auto"
         placeholder="Search for an alert or a place"
     />
+    <div class="z-[500] relative text-3xl ms-12 w-fit">
+        {{ status }}
+    </div>
     <UserMenu />
 </LMap>
 </template>
